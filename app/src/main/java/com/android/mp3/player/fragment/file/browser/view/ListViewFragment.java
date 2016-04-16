@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.lib.tools.handler.MessageManager;
-import com.android.lib.tools.log.MyLog;
 import com.android.lib.tools.perferences.PreferencesUtils;
 import com.android.mp3.player.R;
 import com.android.mp3.player.fragment.BaseFragment;
@@ -28,8 +27,6 @@ import java.util.ArrayList;
  * Created by liutiantian on 2016-04-16.
  */
 public class ListViewFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-    private static final String TAG = "ListViewFragment";
-
     private static final String KEY_FILE_PATH = "file_path";
 
     private FileListAdapter mAdapter;
@@ -46,8 +43,8 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
             if (mAdapter == null) {
                 mAdapter = new FileListAdapter(inflater, PreferencesUtils.getInstance().readStringFromPreferences(getActivity(), null, StaticFields.KEY.REMEMBERED_FOLDER, "/"));
             }
-            if (savedInstanceState != null) {
-                mAdapter.setFilePath(savedInstanceState.getString(KEY_FILE_PATH, "/"));
+            if (savedInstanceState != null && savedInstanceState.getString(KEY_FILE_PATH) != null) {
+                mAdapter.setFilePath(savedInstanceState.getString(KEY_FILE_PATH));
             }
             TextView listHeaderText = (TextView) list.findViewById(R.id.list_header);
             if (listHeaderText != null) {
@@ -98,8 +95,7 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (mAdapter != null) {
-            view.setSelected(true);
+        if (mAdapter != null && getView() != null) {
             File file = (File) mAdapter.getItem(position - 1);
             if (file != null && file.isDirectory()) {
                 mAdapter.setFilePath(file.getAbsolutePath());

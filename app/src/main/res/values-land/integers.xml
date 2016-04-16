@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="fragment_grid_view_grid_num_column">7</integer>
+</resources>
