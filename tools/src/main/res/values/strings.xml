@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">安卓通用工具集</string>
+    <string name="screen_manager_receiver_explanation">亲，开关屏逻辑需要您的恩准哦~</string>
+</resources>

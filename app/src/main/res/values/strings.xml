@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">播放器</string>
+    <string name="fragment_file_choose_choose_file">选择文件</string>
+    <string name="fragment_file_choose_auto_scan_file">自动搜索</string>
+    <string name="fragment_loading_hint_text">正在准备数据，请亲耐心等待&#8230;</string>
+    <string name="fragment_list_view_list_item_type_icon_content_description">类型图标</string>
+    <string name="fragment_browser_list_confirm">选择</string>
+    <string name="fragment_browser_list_back">父目录</string>
+    <string name="fragment_browser_switch_view">切换到视图</string>
+</resources>

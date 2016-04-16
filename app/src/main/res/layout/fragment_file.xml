@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/fragment_file_start_padding"
+    android:paddingEnd="@dimen/fragment_file_end_padding">
+
+    <LinearLayout
+        android:id="@+id/control_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_file_control_area_top_margin"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/choose_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fragment_file_btn_bg"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/fragment_file_choose_choose_file"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/auto_scan_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/fragment_file_auto_scan_file_start_margin"
+            android:background="@drawable/fragment_file_btn_bg"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/fragment_file_choose_auto_scan_file"
+            android:singleLine="true" />
+
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_file_divider_height"
+        android:layout_below="@id/control_area"
+        android:layout_marginTop="@dimen/fragment_file_divider_top_margin"
+        android:layout_marginBottom="@dimen/fragment_file_divider_bottom_margin"
+        android:background="@drawable/fragment_file_divider_bg" />
+
+    <FrameLayout
+        android:id="@+id/file_browser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider" />
+
+</RelativeLayout>

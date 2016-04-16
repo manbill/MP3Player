@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/fragment_file_choose_divider_bg" />
+    <size android:height="@dimen/fragment_file_divider_height" />
+</shape>

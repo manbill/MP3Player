@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_file_start_padding">10dp</dimen>
+    <dimen name="fragment_file_end_padding">10dp</dimen>
+    <dimen name="fragment_file_control_area_top_margin">10dp</dimen>
+    <dimen name="fragment_file_auto_scan_file_start_margin">20dp</dimen>
+    <dimen name="fragment_file_divider_height">2dp</dimen>
+    <dimen name="fragment_file_btn_bg_stroke_width">3dp</dimen>
+    <dimen name="fragment_file_divider_top_margin">10dp</dimen>
+    <dimen name="fragment_file_divider_bottom_margin">10dp</dimen>
+    <dimen name="fragment_list_view_list_item_file_name_start_margin">10dp</dimen>
+    <dimen name="fragment_list_view_list_item_height">40dp</dimen>
+    <dimen name="fragment_loading_progress_bar_width">150dp</dimen>
+    <dimen name="fragment_loading_progress_bar_height">150dp</dimen>
+    <dimen name="fragment_loading_hint_text_size">22sp</dimen>
+    <dimen name="fragment_loading_hint_text_top_margin">25dp</dimen>
+</resources>

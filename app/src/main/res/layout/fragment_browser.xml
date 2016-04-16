@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/browser_control_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="end|center_vertical"
+        android:showDividers="middle">
+
+        <Button
+            android:id="@+id/list_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/fragment_browser_list_confirm" />
+
+        <Button
+            android:id="@+id/list_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/fragment_browser_list_back" />
+
+        <Button
+            android:id="@+id/list_switch_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/fragment_browser_switch_view" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/browser_view_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/browser_control_area"/>
+
+</RelativeLayout>
