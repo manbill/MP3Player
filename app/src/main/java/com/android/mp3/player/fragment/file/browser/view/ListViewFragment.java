@@ -18,9 +18,11 @@ import com.android.mp3.player.fragment.BaseFragment;
 import com.android.mp3.player.manager.NewsManager;
 import com.android.mp3.player.process.StartProcess;
 import com.android.mp3.player.util.StaticFields;
+import com.android.mp3.player.util.StaticMethods;
 import com.java.lib.oil.GlobalMethods;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by liutiantian on 2016-04-16.
@@ -113,7 +115,7 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
     private static class FileListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
         private String filePath;
-        private File[] listItems;
+        private ArrayList<File> listItems;
 
         public FileListAdapter(LayoutInflater inflater, String filePath) {
             this.inflater = inflater;
@@ -141,12 +143,12 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
 
         @Override
         public int getCount() {
-            return this.listItems != null ? this.listItems.length : 0;
+            return this.listItems != null ? this.listItems.size() : 0;
         }
 
         @Override
         public Object getItem(int position) {
-            return this.listItems != null ? this.listItems[position] : null;
+            return this.listItems != null ? this.listItems.get(position) : null;
         }
 
         @Override
@@ -160,7 +162,7 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
                 convertView = this.inflater.inflate(R.layout.fragment_list_view_list_item, parent, false);
             }
 
-            File file = this.listItems[position];
+            File file = this.listItems.get(position);
             if (file != null && file.exists()) {
                 ImageView typeIconImage = (ImageView) convertView.findViewById(R.id.type_icon);
                 if (typeIconImage != null) {
@@ -185,36 +187,10 @@ public class ListViewFragment extends BaseFragment implements AdapterView.OnItem
             if (this.filePath != null) {
                 File file = new File(this.filePath);
                 if (file.exists()) {
-                    this.listItems = file.listFiles();
-                    if (this.listItems != null && this.listItems.length > 0) {
-                        for (int i = 0; i < this.listItems.length; ++i) {
-                            File min = this.listItems[i];
-                            for (int j = i + 1; j < this.listItems.length; ++j) {
-                                if (min.isFile() && this.listItems[j].isDirectory()) {
-                                    this.listItems[i] = this.listItems[j];
-                                    this.listItems[j] = min;
-                                    min = this.listItems[i];
-                                }
-                            }
-                        }
-
-                        for (int i = 0; i < this.listItems.length; ++i) {
-                            File min = this.listItems[i];
-                            for (int j = i + 1; j < this.listItems.length; ++j) {
-                                if (min.getName().compareTo(this.listItems[j].getName()) > 0) {
-                                    if ((min.isFile() && this.listItems[j].isFile()) || (min.isDirectory() && this.listItems[j].isDirectory())) {
-                                        this.listItems[i] = this.listItems[j];
-                                        this.listItems[j] = min;
-                                        min = this.listItems[i];
-                                    }
-                                }
-                            }
-                        }
-
-                        for (int i = 0; i < this.listItems.length; ++i) {
-                            MyLog.i(TAG, "FileListAdapter.onNewFilePath", "this.listItems[" + i + "]; " + this.listItems[i].getAbsolutePath());
-                        }
-                    }
+                    this.listItems = StaticMethods.getInstance().listFiles(file);
+                }
+                else {
+                    this.listItems = null;
                 }
             }
         }
