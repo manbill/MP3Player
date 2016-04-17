@@ -84,6 +84,21 @@ public class StartProcess {
                 else if (msg.what == StaticFields.MSG.SHOW_INT_TOAST) {
                     Toast.makeText(process.getContext(), (Integer) msg.obj, msg.arg1 == 0 ? Toast.LENGTH_LONG : msg.arg1).show();
                 }
+                else if (msg.what == StaticFields.MSG.PROCESS_CHECK_PLAY_FILE) {
+                    String sPlayFile = PreferencesUtils.getInstance().readStringFromPreferences(process.getContext(), null, StaticFields.KEY.REMEMBERED_FILE, null);
+                    if (sPlayFile == null) {
+                        MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_CHECK_PLAY_LIST);
+                    }
+                    else {
+                        MusicFile playFile = JSON.parseObject(sPlayFile, MusicFile.class);
+                        if (playFile == null) {
+                            MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_CHECK_PLAY_LIST);
+                        }
+                        else {
+                            MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_PLAY_FRAGMENT);
+                        }
+                    }
+                }
                 else if (msg.what == StaticFields.MSG.PROCESS_CHECK_PLAY_LIST) {
                     String sPlayList = PreferencesUtils.getInstance().readStringFromPreferences(process.getContext(), null, StaticFields.KEY.PLAY_LIST, null);
                     if (sPlayList == null) {

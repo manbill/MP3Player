@@ -8,18 +8,19 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.lib.tools.handler.MessageManager;
 import com.android.lib.tools.perferences.PreferencesUtils;
 import com.android.mp3.player.R;
+import com.android.mp3.player.data.MusicFile;
 import com.android.mp3.player.fragment.BaseFragment;
 import com.android.mp3.player.manager.NewsManager;
 import com.android.mp3.player.process.StartProcess;
 import com.android.mp3.player.util.StaticFields;
 import com.android.mp3.player.util.StaticMethods;
 import com.java.lib.oil.GlobalMethods;
+import com.java.lib.oil.json.JSON;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -77,12 +78,7 @@ public class GridViewFragment extends BaseFragment implements AdapterView.OnItem
             else if (GlobalMethods.getInstance().checkEqual(sMsg, "browser_confirm")) {
                 if (mAdapter != null) {
                     PreferencesUtils.getInstance().writeStringToPreferences(getActivity(), null, StaticFields.KEY.REMEMBERED_FOLDER, mAdapter.getFilePath());
-                    if (new File(mAdapter.getFilePath()).isDirectory()) {
-                        MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_PROGRAM_FRAGMENT);
-                    }
-                    else {
-                        MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_PLAY_FRAGMENT);
-                    }
+                    MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_PROGRAM_FRAGMENT);
                 }
             }
         }
@@ -93,12 +89,18 @@ public class GridViewFragment extends BaseFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (mAdapter != null && getView() != null) {
             File file = (File) mAdapter.getItem(position);
-            if (file != null && file.isDirectory()) {
-                mAdapter.setFilePath(file.getAbsolutePath());
+            if (file != null) {
+                if (file.isDirectory()) {
+                    mAdapter.setFilePath(file.getAbsolutePath());
 
-                TextView gridHeaderText = (TextView) getView().findViewById(R.id.grid_header);
-                if (gridHeaderText != null) {
-                    gridHeaderText.setText(mAdapter.getFilePath());
+                    TextView gridHeaderText = (TextView) getView().findViewById(R.id.grid_header);
+                    if (gridHeaderText != null) {
+                        gridHeaderText.setText(mAdapter.getFilePath());
+                    }
+                }
+                else {
+                    PreferencesUtils.getInstance().writeStringToPreferences(getActivity(), null, StaticFields.KEY.REMEMBERED_FILE, JSON.toJsonString(new MusicFile(file.getAbsolutePath(), 0), MusicFile.class));
+                    MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_PLAY_FRAGMENT);
                 }
             }
         }
