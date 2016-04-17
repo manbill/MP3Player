@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">播放器</string>
     <string name="fragment_file_choose_choose_file">选择文件</string>
     <string name="fragment_file_choose_auto_scan_file">自动搜索</string>
@@ -9,4 +9,5 @@
     <string name="fragment_browser_list_confirm">选择</string>
     <string name="fragment_browser_list_back">父目录</string>
     <string name="fragment_browser_switch_view">切换视图</string>
+    <string name="mp3_query_thread_result_number">共发现<xliff:g id="date">%s</xliff:g>首音频文件</string>
 </resources>

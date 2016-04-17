@@ -12,6 +12,7 @@ import com.android.mp3.player.data.MusicFile;
 import com.android.mp3.player.fragment.file.FileFragment;
 import com.android.mp3.player.fragment.load.LoadingFragment;
 import com.android.mp3.player.manager.PageManager;
+import com.android.mp3.player.thread.MP3QueryThread;
 import com.android.mp3.player.util.StaticFields;
 import com.java.lib.oil.json.JSON;
 
@@ -59,7 +60,7 @@ public class StartProcess {
 
     public void start() {
         MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_SHOW_LOADING_FRAGMENT);
-        MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_CHECK_PLAY_LIST);
+        MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_EXECUTE_QUERY_SYSTEM_AUDIO_FILE_START);
     }
 
     private static class StartProcessHandler extends MessageManager.BaseHandler<StartProcess> {
@@ -83,6 +84,12 @@ public class StartProcess {
                 }
                 else if (msg.what == StaticFields.MSG.SHOW_INT_TOAST) {
                     Toast.makeText(process.getContext(), (Integer) msg.obj, msg.arg1 == 0 ? Toast.LENGTH_LONG : msg.arg1).show();
+                }
+                else if (msg.what == StaticFields.MSG.PROCESS_EXECUTE_QUERY_SYSTEM_AUDIO_FILE_START) {
+                    new MP3QueryThread(process.getContext()).start();
+                }
+                else if (msg.what == StaticFields.MSG.PROCESS_EXECUTE_QUERY_SYSTEM_AUDIO_FILE_END) {
+                    MessageManager.getInstance().sendEmptyMessage(StartProcess.class, StaticFields.MSG.PROCESS_CHECK_PLAY_FILE);
                 }
                 else if (msg.what == StaticFields.MSG.PROCESS_CHECK_PLAY_FILE) {
                     String sPlayFile = PreferencesUtils.getInstance().readStringFromPreferences(process.getContext(), null, StaticFields.KEY.REMEMBERED_FILE, null);
