@@ -1,0 +1,9 @@
+[submodule "views"]
+	path = views
+	url = git@github.com:liutiantian/views.git
+[submodule "tools"]
+	path = tools
+	url = git@github.com:liutiantian/tools.git
+[submodule "oil"]
+	path = oil
+	url = git@github.com:liutiantian/oil.git
