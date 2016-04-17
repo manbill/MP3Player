@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Android tools</string>
-    <string name="screen_manager_receiver_explanation">lock screen privilege need your permission.</string>
-</resources>
